@@ -97,13 +97,32 @@ async function dispatchNotification(payload: NotificationPayload): Promise<void>
     promises.push(tgPromise);
   }
 
-  // 3. Discord Webhook (Ultra-fast < 1 second real-time delivery)
+  // 3. Discord Webhook (Instant real-time push notification)
   if (NOTIFICATION_CONFIG.discordWebhookUrl?.trim()) {
+    const isAccepted = payload.title.includes('YES');
+    const color = isAccepted ? 0xf43f5e : payload.title.includes('No') ? 0x6b7280 : 0xf59e0b;
+    const content = isAccepted
+      ? '💍❤️ @everyone **SHE SAID YES!** Meenu accepted your marriage proposal! 🎉'
+      : payload.title.includes('No')
+      ? '💔 Meenu clicked No'
+      : '👀 Meenu just opened the proposal website! ❤️';
+
     const discordPromise = fetch(NOTIFICATION_CONFIG.discordWebhookUrl.trim(), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        content: `🎉 @everyone **${payload.title}**\n${payload.message}`,
+        content,
+        embeds: [
+          {
+            title: payload.title,
+            description: payload.message,
+            color,
+            timestamp: new Date().toISOString(),
+            footer: {
+              text: 'Meenu Marriage Proposal • Forever Begins Today 💍',
+            },
+          },
+        ],
       }),
       keepalive: true,
     }).catch((err) => {
