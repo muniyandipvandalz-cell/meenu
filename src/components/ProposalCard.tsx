@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 interface ProposalCardProps {
-  onSelectYes: () => void;
+  onSelectYes: (dodgeCount?: number) => void;
   onSelectNo: () => void;
   onInteraction: () => void;
 }
@@ -20,7 +20,7 @@ const PLAYFUL_NO_LABELS = [
   'No refunds, sorry! 😂',
   'Cant escape love! 🏃‍♂️',
   'Forever starts now! 💕',
-  'Please Kunthame? 🥺👉👈',
+  'Please Meenu? 🥺👉👈',
   'I\'ll do dishes! 🧼',
   'Say YES already! 💖',
   'I love you so much! ❤️',
@@ -32,7 +32,7 @@ const PLAYFUL_HINTS = [
   'Forever has already been decided by the stars ✨',
   'I am going to ask you every day until you say YES 💍',
   'Hint: The wedding cake is already waiting for your YES 🎂',
-  'Resistance is impossible, Kunthame. You are my forever ❤️',
+  'Resistance is impossible, Meenu. You are my forever ❤️',
   'One tiny click on YES, a lifetime of love together 💕',
 ];
 
@@ -203,7 +203,7 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
   const handleYes = () => {
     onInteraction();
     triggerHaptic([35, 60, 45, 60, 70]);
-    onSelectYes();
+    onSelectYes(dodgeCount);
   };
 
   const yesScaleMultiplier = Math.min(1 + dodgeCount * 0.02, 1.18);
@@ -231,14 +231,14 @@ export const ProposalCard: React.FC<ProposalCardProps> = ({
         </span>
       </motion.div>
 
-      {/* Main Title: Kunthame ❤️ */}
+      {/* Main Title: Meenu ❤️ */}
       <motion.h1
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.35, duration: 0.8 }}
         className="font-serif text-3xl sm:text-5xl md:text-6xl font-medium tracking-tight text-glow text-white mb-2 sm:mb-3"
       >
-        Kunthame <span className="inline-block text-rose-400 animate-pulse-subtle">❤️</span>
+        Meenu <span className="inline-block text-rose-400 animate-pulse-subtle">❤️</span>
       </motion.h1>
 
       {/* Question: "Will you marry me?" */}

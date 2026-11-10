@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { PetalCanvas } from './components/PetalCanvas';
@@ -6,10 +6,16 @@ import { AmbientStarfield } from './components/AmbientStarfield';
 import { ProposalCard } from './components/ProposalCard';
 import { ResultScreen } from './components/ResultScreen';
 import { AudioController } from './components/AudioController';
+import { sendPhoneNotification, notifySiteOpened } from './services/notificationService';
 
 export const App: React.FC = () => {
   const [outcome, setOutcome] = useState<'idle' | 'accepted' | 'declined'>('idle');
   const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Notify when visitor opens the page
+    notifySiteOpened();
+  }, []);
 
   const handleInteraction = useCallback(() => {
     if (!hasUserInteracted) {
@@ -17,8 +23,9 @@ export const App: React.FC = () => {
     }
   }, [hasUserInteracted]);
 
-  const handleSelectYes = useCallback(() => {
+  const handleSelectYes = useCallback((dodgeCount?: number) => {
     setOutcome('accepted');
+    sendPhoneNotification('accepted', { dodgeCount });
 
     try {
       const count = 150;
@@ -75,6 +82,7 @@ export const App: React.FC = () => {
 
   const handleSelectNo = useCallback(() => {
     setOutcome('declined');
+    sendPhoneNotification('declined');
   }, []);
 
   return (
@@ -95,7 +103,7 @@ export const App: React.FC = () => {
         <AnimatePresence mode="wait">
           {outcome === 'idle' && (
             <ProposalCard
-              key="proposal-card-kunthame"
+              key="proposal-card-meenu"
               onSelectYes={handleSelectYes}
               onSelectNo={handleSelectNo}
               onInteraction={handleInteraction}
@@ -103,11 +111,11 @@ export const App: React.FC = () => {
           )}
 
           {outcome === 'accepted' && (
-            <ResultScreen key="result-accepted-kunthame" outcome="accepted" />
+            <ResultScreen key="result-accepted-meenu" outcome="accepted" />
           )}
 
           {outcome === 'declined' && (
-            <ResultScreen key="result-declined-kunthame" outcome="declined" />
+            <ResultScreen key="result-declined-meenu" outcome="declined" />
           )}
         </AnimatePresence>
       </div>

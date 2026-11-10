@@ -107,7 +107,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ outcome }) => {
             transition={{ delay: 0.4, duration: 0.9 }}
             className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-glow text-white mb-2 sm:mb-3"
           >
-            Thank you, Kunthame <span className="inline-block text-rose-400">❤️</span>
+            Thank you, Meenu <span className="inline-block text-rose-400">❤️</span>
           </motion.h1>
 
           <motion.p

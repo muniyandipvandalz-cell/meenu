@@ -1,12 +1,12 @@
-# Kunthame ❤️ 💍 — Interactive Marriage Proposal Website
+# Meenu ❤️ 💍 — Interactive Marriage Proposal Website
 
-A minimal, dreamy, cinematic romantic interactive marriage proposal website built for **Kunthame ❤️** ("Will you marry me?"), featuring mobile-first design, infinite spring-dodging NO button, and romantic instrumental music.
+A minimal, dreamy, cinematic romantic interactive marriage proposal website built for **Meenu ❤️** ("Will you marry me?"), featuring mobile-first design, infinite spring-dodging NO button, and romantic instrumental music.
 
 ---
 
 ## 💍 Highlights & Features
 
-- **Personalized for Kunthame ❤️**:
+- **Personalized for Meenu ❤️**:
   - Main question: **"Will you marry me?"** 💍
   - Subtitle: *"In a world of billions, my heart chose you. Forever and always."*
 - **Interactive Infinite NO Button**:
@@ -26,7 +26,7 @@ A minimal, dreamy, cinematic romantic interactive marriage proposal website buil
 ## 🚀 Running Locally
 
 ```bash
-cd E:\kunthame
+npm install
 npm run dev
 ```
 Open [http://localhost:3001](http://localhost:3001) in your browser.

@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-const YOUTUBE_VIDEO_ID = '_MYpI4ZQooE'; // "Karthaave Nee" from Christian Brothers
+const YOUTUBE_VIDEO_ID = 'XHu2v3piSOU'; // "Engagement Ring (Background Score)" by Anirudh Ravichander
 
 export const AudioController: React.FC<AudioControllerProps> = ({ hasUserInteracted }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -37,7 +37,7 @@ export const AudioController: React.FC<AudioControllerProps> = ({ hasUserInterac
     const initPlayer = () => {
       if (window.YT && window.YT.Player && !playerRef.current) {
         try {
-          playerRef.current = new window.YT.Player('kunthame-yt-audio-player', {
+          playerRef.current = new window.YT.Player('meenu-yt-audio-player', {
             height: '1',
             width: '1',
             videoId: YOUTUBE_VIDEO_ID,
@@ -239,7 +239,7 @@ export const AudioController: React.FC<AudioControllerProps> = ({ hasUserInterac
         className="fixed -top-96 -left-96 w-1 h-1 opacity-0 pointer-events-none overflow-hidden"
         aria-hidden="true"
       >
-        <div id="kunthame-yt-audio-player" />
+        <div id="meenu-yt-audio-player" />
       </div>
 
       {/* Floating Music Toggle Button */}
@@ -248,8 +248,8 @@ export const AudioController: React.FC<AudioControllerProps> = ({ hasUserInterac
           onClick={handleToggle}
           type="button"
           className="group relative flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full glass-panel border border-pink-400/25 text-pink-200/90 hover:text-pink-100 hover:border-pink-300/40 hover:bg-rose-950/40 active:scale-95 transition-all duration-300 shadow-lg shadow-black/40"
-          aria-label={isPlaying ? 'Mute song' : 'Play song: Karthaave Nee'}
-          title="Karthaave Nee (Christian Brothers)"
+          aria-label={isPlaying ? 'Mute song' : 'Play song: Engagement Ring (Anirudh)'}
+          title="Engagement Ring (Background Score) - Anirudh"
         >
           <span className="relative flex h-2 w-2">
             {isPlaying && (
@@ -271,7 +271,7 @@ export const AudioController: React.FC<AudioControllerProps> = ({ hasUserInterac
           <div className="flex items-center gap-1">
             <Music className="w-3 h-3 text-pink-400/80" />
             <span className="text-[11px] sm:text-xs font-serif italic tracking-wide text-pink-200/90 group-hover:text-pink-100 whitespace-nowrap">
-              {isPlaying ? 'Karthaave Nee 🎵' : 'Play Song 🎵'}
+              {isPlaying ? 'Engagement Ring 🎵' : 'Play Song 🎵'}
             </span>
           </div>
         </button>

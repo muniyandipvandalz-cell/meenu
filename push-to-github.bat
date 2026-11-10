@@ -1,12 +1,12 @@
 @echo off
-title Push Kunthame Proposal to GitHub
+title Push Meenu Proposal to GitHub
 color 0E
 echo ========================================================
-echo    Pushing Kunthame Marriage Proposal to GitHub...
+echo    Pushing Meenu Marriage Proposal to GitHub...
 echo ========================================================
 echo.
 
-cd /d "E:\kunthame"
+cd /d "%~dp0"
 git push -u origin main
 
 echo.
