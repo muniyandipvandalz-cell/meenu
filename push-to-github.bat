@@ -22,10 +22,10 @@ echo.
 echo ========================================================
 if %ERRORLEVEL% EQU 0 (
     echo    SUCCESS! Site is being published via GitHub Actions!
-    echo    Your live link: https://erenxt250.github.io/Kunthame/
+    echo    Your live link: https://muniyandipvandalz-cell.github.io/meenu/
 ) else (
     echo    If asked for username and token, enter your GitHub
-    echo    username (erenXT250) and your Personal Access Token.
+    echo    username (muniyandipvandalz-cell) and your Personal Access Token.
 )
 echo ========================================================
 echo.
