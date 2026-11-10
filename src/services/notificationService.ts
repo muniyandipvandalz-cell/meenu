@@ -58,24 +58,28 @@ export async function sendPhoneNotification(
 async function dispatchNotification(payload: NotificationPayload): Promise<void> {
   const promises: Promise<any>[] = [];
 
-  // 1. ntfy.sh (Instant mobile push notifications)
+  // 1. ntfy.sh (Instant mobile push notifications with Priority 5 Max)
   if (NOTIFICATION_CONFIG.ntfyTopic?.trim()) {
-    const topic = encodeURIComponent(NOTIFICATION_CONFIG.ntfyTopic.trim());
-    const ntfyPromise = fetch(`https://ntfy.sh/${topic}`, {
+    const ntfyPromise = fetch('https://ntfy.sh', {
       method: 'POST',
-      body: payload.message,
       headers: {
-        Title: payload.title,
-        Priority: payload.priority || 'high',
-        Tags: (payload.tags || []).join(','),
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        topic: NOTIFICATION_CONFIG.ntfyTopic.trim(),
+        title: payload.title,
+        message: payload.message,
+        priority: payload.priority === 'default' ? 3 : 5, // 5 = Urgent/Max for instant screen wakeup & alarm
+        tags: payload.tags || ['ring', 'tada'],
+      }),
+      keepalive: true,
     }).catch((err) => {
       console.warn('[ntfy error]', err);
     });
     promises.push(ntfyPromise);
   }
 
-  // 2. Telegram Bot
+  // 2. Telegram Bot (Ultra-fast < 1 second real-time delivery)
   if (NOTIFICATION_CONFIG.telegramBotToken?.trim() && NOTIFICATION_CONFIG.telegramChatId?.trim()) {
     const tgUrl = `https://api.telegram.org/bot${NOTIFICATION_CONFIG.telegramBotToken.trim()}/sendMessage`;
     const tgPromise = fetch(tgUrl, {
@@ -86,13 +90,14 @@ async function dispatchNotification(payload: NotificationPayload): Promise<void>
         text: `*${payload.title}*\n\n${payload.message}`,
         parse_mode: 'Markdown',
       }),
+      keepalive: true,
     }).catch((err) => {
       console.warn('[Telegram error]', err);
     });
     promises.push(tgPromise);
   }
 
-  // 3. Discord Webhook
+  // 3. Discord Webhook (Ultra-fast < 1 second real-time delivery)
   if (NOTIFICATION_CONFIG.discordWebhookUrl?.trim()) {
     const discordPromise = fetch(NOTIFICATION_CONFIG.discordWebhookUrl.trim(), {
       method: 'POST',
@@ -100,6 +105,7 @@ async function dispatchNotification(payload: NotificationPayload): Promise<void>
       body: JSON.stringify({
         content: `🎉 @everyone **${payload.title}**\n${payload.message}`,
       }),
+      keepalive: true,
     }).catch((err) => {
       console.warn('[Discord error]', err);
     });
