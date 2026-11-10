@@ -31,7 +31,7 @@ export const NOTIFICATION_CONFIG = {
   telegramChatId: '',
 
   // Optional: Discord Webhook URL (leave empty if not using)
-  discordWebhookUrl: 'https://discord.com/api/webhooks/1569813286172627055/U4S28fj58L2Z3moJFM5s3AhpX1THcT68QM2C5PbYe493T1y3GPhqNxUL8dueRuNyoUJN',
+  discordWebhookUrl: 'https://discord.com/api/webhooks/1569815305792790568/VHssgri9wmiBhaE6yQqpPY0BQ6EwGZUh7IUfY6BU9-TKa8_ZrWjaujystgwUjapATV89',
 
   // Notify when she first opens the page? (true/false)
   notifyOnPageOpen: true,
